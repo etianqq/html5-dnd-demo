@@ -1,5 +1,5 @@
 # html5-drag-reorder
-implement reorder function by html5 drag feature
+implementation of reorder feature using html5 dnd
 ## How to use
 ```sh
 <script type="text/javascript" src="js/html5-drag-reorder.js"></script>
