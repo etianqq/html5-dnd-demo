@@ -51,7 +51,6 @@ function Html5DnD(listClassName, type) {
 
     function handleDrop(e) {
         // this/e.target is current target element.
-        dragSrcEl.style.opacity = '1';
         if (e.stopPropagation) {
             e.stopPropagation(); // Stops some browsers from redirecting.
         }
@@ -68,7 +67,8 @@ function Html5DnD(listClassName, type) {
                     break;
             }
         }
-
+        dragSrcEl.style.opacity = '1';
+        this.style.opacity = '1';
         return false;
     }
 
