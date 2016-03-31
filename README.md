@@ -1,4 +1,4 @@
-# html5 drag and drop
+# html5 dnd reorder
 implementation of switch and reorder feature using html5 dnd
 ## How to use
 ```sh
