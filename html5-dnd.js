@@ -85,9 +85,12 @@ function Html5DnD(listClassName, type) {
      * @param that target
      */
     function doItemsSwitch(e, that) {
+        var targetAttrObj = copyElementOwnAttributes(that);
+        var dragSrcAttrObj = copyElementOwnAttributes(dragSrcEl);
         dragSrcEl.innerHTML = that.innerHTML;
         that.innerHTML = e.dataTransfer.getData('text/html');
-        // todo
+        copyObjToElementAttributes(dragSrcEl, targetAttrObj);
+        copyObjToElementAttributes(that, dragSrcAttrObj);
     }
 
     /**
@@ -110,14 +113,7 @@ function Html5DnD(listClassName, type) {
     function getElementsArray(elements) {
         var array = [];
         elements.forEach(function (elt) {
-            var attributes = {};
-            var attrObj = elt.attributes;
-            for (var key in attrObj) {
-                if (attrObj.hasOwnProperty(key)) {
-                    var valueObj = attrObj[key];
-                    attributes[valueObj.nodeName] = valueObj.nodeValue;
-                }
-            }
+            var attributes = copyElementOwnAttributes(elt);
             array.push({attributes: attributes, innerHTML: elt.innerHTML});
         });
         return array;
@@ -126,16 +122,27 @@ function Html5DnD(listClassName, type) {
     function reorderElementList(eltArray) {
         [].forEach.call(cols, function (col, index) {
             var newElt = eltArray[index];
-            copyAttributes(newElt, col);
+            copyObjToElementAttributes(col, newElt.attributes);
             col.setAttribute("order", index);
             col.innerHTML = newElt.innerHTML;
         });
     }
 
-    function copyAttributes(source, target) {
-        var attributes = source.attributes;
-        for (var name in attributes) {
-            target.setAttribute(name, attributes[name]);
+    function copyElementOwnAttributes(elt) {
+        var attributes = {};
+        var attrObj = elt.attributes;
+        for (var key in attrObj) {
+            if (attrObj.hasOwnProperty(key)) {
+                var valueObj = attrObj[key];
+                attributes[valueObj.nodeName] = valueObj.nodeValue;
+            }
+        }
+        return attributes;
+    }
+
+    function copyObjToElementAttributes(targetElt, sourceObj) {
+        for (var name in sourceObj) {
+            targetElt.setAttribute(name, sourceObj[name]);
         }
     }
 }
