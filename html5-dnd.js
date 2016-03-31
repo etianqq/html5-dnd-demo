@@ -67,14 +67,13 @@ function Html5DnD(listClassName, type) {
                     break;
             }
         }
-        dragSrcEl.style.opacity = '1';
-        this.style.opacity = '1';
         return false;
     }
 
     function handleDragEnd(e) {
         // this/e.target is the source node.
         [].forEach.call(cols, function (col) {
+            col.style.opacity = '1';
             col.classList.remove('over');
         });
     }
@@ -88,6 +87,7 @@ function Html5DnD(listClassName, type) {
     function doItemsSwitch(e, that) {
         dragSrcEl.innerHTML = that.innerHTML;
         that.innerHTML = e.dataTransfer.getData('text/html');
+        // todo
     }
 
     /**
@@ -111,7 +111,13 @@ function Html5DnD(listClassName, type) {
         var array = [];
         elements.forEach(function (elt) {
             var attributes = {};
-            copyAttributes(attributes, elt);
+            var attrObj = elt.attributes;
+            for (var key in attrObj) {
+                if (attrObj.hasOwnProperty(key)) {
+                    var valueObj = attrObj[key];
+                    attributes[valueObj.nodeName] = valueObj.nodeValue;
+                }
+            }
             array.push({attributes: attributes, innerHTML: elt.innerHTML});
         });
         return array;
@@ -120,16 +126,16 @@ function Html5DnD(listClassName, type) {
     function reorderElementList(eltArray) {
         [].forEach.call(cols, function (col, index) {
             var newElt = eltArray[index];
-            copyAttributes(col, newElt);
+            copyAttributes(newElt, col);
             col.setAttribute("order", index);
             col.innerHTML = newElt.innerHTML;
         });
     }
 
     function copyAttributes(source, target) {
-        var attributes = target.attributes;
+        var attributes = source.attributes;
         for (var name in attributes) {
-            source[name] = target[name];
+            target.setAttribute(name, attributes[name]);
         }
     }
 }
