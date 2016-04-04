@@ -1,10 +1,10 @@
 function Html5DnD(listClassName, type) {
-    var ACTION = {"switch": 0, "reorder": 1};
+    var ACTION = {"reorder": 0, "switch": 1};
 
     var dragSrcEl = null, cols;
 
 
-    var actionType = ACTION[type] || ACTION["switch"];
+    var actionType = ACTION[type] || ACTION["reorder"];
     addDragEvent();
 
     function addDragEvent() {
@@ -57,13 +57,13 @@ function Html5DnD(listClassName, type) {
         // Don't do anything if dropping the same column we're dragging.
         if (dragSrcEl != this) {
             switch (actionType) {
-                // "switch type"
-                case 0:
-                    doItemsSwitch(e, this);
-                    break;
                 // "reorder type"
-                case 1:
+                case 0:
                     doItemsReorder(e, this);
+                    break;
+                // "switch type"
+                case 1:
+                    doItemsSwitch(e, this);
                     break;
             }
         }
