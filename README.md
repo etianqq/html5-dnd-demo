@@ -1,4 +1,4 @@
-# html5 dnd reorder
+# html5 dnd demo
 implementation of switch and reorder feature using html5 dnd
 ## How to use
 ```sh
@@ -18,11 +18,11 @@ implementation of switch and reorder feature using html5 dnd
 </ul>
 
 <script>
-    new Html5DnD("#drag-switch li, "switch");  // or new Html5DnD("#drag-switch li);
-    new Html5DnD("#drag-reorder li", "reorder");
+    new Html5DnD("#drag-switch li, "switch");  
+    new Html5DnD("#drag-reorder li", "reorder"); // or new Html5DnD("#drag-switch li);
 </script>
 </body>
 ```
-The default dnd type is "switch".
+The default dnd type is "reorder".
 
 Referenced document: [http://www.html5rocks.com/en/tutorials/dnd/basics/]
