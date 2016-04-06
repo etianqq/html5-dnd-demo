@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        h3 {
+            margin-top: 100px;
+        }
+
+        #box {
+            margin: 50px 0 100px 100px;
+        }
+
+        ul > li {
+            margin: 20px 0 0 0;
+            font-size: 14px;
+            border: 1px solid #C0C0C0;
+            padding: 5px 15px;
+            border-radius: 10px;
+            cursor: pointer;
+            width: 70%;
+        }
+
+        .green {
+            background-color: #69c773;
+            color: #FFFFFF;
+        }
+
+        .red {
+            background-color: brown;
+            color: #FFFFFF;
+        }
+
+        .blue {
+            background-color: #4090ba;
+            color: #FFFFFF;
+        }
+
+        .gray {
+            background-color: grey;
+        }
+
+        caption {
+            padding-top: 8px;
+            padding-bottom: 8px;
+            color: #777;
+            text-align: left;
+        }
+
+        th {
+            text-align: left;
+        }
+
+        .table {
+            width: 100%;
+            max-width: 100%;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+        }
+
+        .table > thead > tr > th,
+        .table > tbody > tr > th,
+        .table > tfoot > tr > th,
+        .table > thead > tr > td,
+        .table > tbody > tr > td,
+        .table > tfoot > tr > td {
+            padding: 8px;
+            line-height: 1.42857143;
+            vertical-align: top;
+            border-top: 1px solid #ddd;
+        }
+
+        .table > thead > tr > th {
+            vertical-align: bottom;
+            border-bottom: 2px solid #ddd;
+        }
+
+        .table > caption + thead > tr:first-child > th,
+        .table > colgroup + thead > tr:first-child > th,
+        .table > thead:first-child > tr:first-child > th,
+        .table > caption + thead > tr:first-child > td,
+        .table > colgroup + thead > tr:first-child > td,
+        .table > thead:first-child > tr:first-child > td {
+            border-top: 0;
+        }
+
+        .table > tbody + tbody {
+            border-top: 2px solid #ddd;
+        }
+
+        .table .table {
+            background-color: #fff;
+        }
+
+        /* Prevent the text contents of draggable elements from being selectable. */
+        [draggable] {
+            -moz-user-select: none;
+            -khtml-user-select: none;
+            -webkit-user-select: none;
+            user-select: none;
+            /* Required to make elements draggable in old WebKit */
+            -khtml-user-drag: element;
+            -webkit-user-drag: element;
+        }
+    </style>
+    <script src="js/html5-dnd.js" type="application/javascript"></script>
+</head>
+<body>
+<div id="box">
+    <h3>Switch</h3>
+    <ul id="drag-switch">
+
+        <li class="item">List item 1</li>
+
+        <li class="item green">List item 2</li>
+
+        <li class="item red">List item 3</li>
+
+        <li class="item blue">List item 4</li>
+
+        <li class="item gray">List item 5</li>
+    </ul>
+
+    <h3>Reorder</h3>
+    <ul id="drag-reorder">
+
+        <li class="item">List item 1</li>
+
+        <li class="item green">List item 2</li>
+
+        <li class="item red">List item 3</li>
+
+        <li class="item blue">List item 4</li>
+
+        <li class="item gray">List item 5</li>
+    </ul>
+
+    <h3>Table reorder</h3>
+    <table class="table" id="table-reorder">
+        <thead>
+        <tr>
+            <th>#</th>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Username</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <th scope="row">1</th>
+            <td>Mark</td>
+            <td>Otto</td>
+            <td>@mdo</td>
+        </tr>
+        <tr class="red">
+            <th scope="row">2</th>
+            <td>Jacob</td>
+            <td>Thornton</td>
+            <td>@fat</td>
+        </tr>
+        <tr class="blue">
+            <th scope="row">3</th>
+            <td>Larry</td>
+            <td>the Bird</td>
+            <td>@twitter</td>
+        </tr>
+        <tr class="green">
+            <th scope="row">4</th>
+            <td>Nicole</td>
+            <td>the Bear</td>
+            <td>@twitter</td>
+        </tr>
+        <tr class="gray">
+            <th scope="row">5</th>
+            <td>Jada</td>
+            <td>the Cat</td>
+            <td>@twitter</td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+<script>
+    new Html5DnD("#drag-switch li", {type: "switch"});
+    new Html5DnD("#drag-reorder li", {type: "reorder"});
+    new Html5DnD("#table-reorder tr");
+</script>
+</body>
+</html>
